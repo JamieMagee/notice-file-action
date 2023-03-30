@@ -1,0 +1,14 @@
+name: test
+
+on:
+  - push
+  - workflow_dispatch
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: JamieMagee/notice-action
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
