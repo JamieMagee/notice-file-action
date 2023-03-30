@@ -102,6 +102,6 @@ fs.writeFileSync(noticeFile, noticeRes.content);
 const artifactClient = artifact.create();
 await artifactClient.uploadArtifact(
   "notice.html",
-  ["notice.html"],
+  [noticeFile],
   process.env["RUNNER_TEMP"]!
 );
