@@ -97,6 +97,16 @@ if (!Value.Check(ClearlyDefinedNoticeResponse, noticeRes)) {
   process.exit(0);
 }
 
+for (const noCopyright of noticeRes.summary.warnings.noCopyright) {
+  core.warning(`Unable to locate copyright for ${noCopyright}`);
+}
+for (const noDefinition of noticeRes.summary.warnings.noDefinition) {
+  core.warning(`Unable to find package ${noDefinition}`);
+}
+for (const noLicense of noticeRes.summary.warnings.noLicense) {
+  core.warning(`Unable to find locate license for ${noLicense}`);
+}
+
 const noticeFile = path.join(process.env["RUNNER_TEMP"]!, "notice.html");
 
 fs.writeFileSync(noticeFile, noticeRes.content);
