@@ -1,0 +1,5 @@
+name: 'NOTICE file generator'
+description: 'Generates NOTICE files'
+runs:
+  main: dist/index.js
+  using: node16
