@@ -25,7 +25,7 @@ const [owner, name, ..._] = githubRepository.split("/");
 
 const octokit = new (Octokit.plugin(paginateGraphql))({
   auth: `token ${process.env["GITHUB_TOKEN"]}`,
-  previews: ["hawkgirl"],
+  previews: ["hawkgirl"], // https://docs.github.com/en/graphql/overview/schema-previews#access-to-a-repositorys-dependency-graph-preview
 });
 
 const res = await octokit.graphql(
@@ -33,18 +33,19 @@ const res = await octokit.graphql(
     query ($owner: String!, $name: String!) {
       repository(owner: $owner, name: $name) {
         dependencyGraphManifests {
-          edges {
-            node {
-              blobPath
-              filename
-              dependencies {
-                nodes {
-                  packageManager
-                  packageName
-                  requirements
-                }
+          nodes {
+            blobPath
+            dependencies {
+              nodes {
+                packageManager
+                packageName
+                requirements
               }
             }
+            dependenciesCount
+            exceedsMaxSize
+            filename
+            parseable
           }
         }
       }
@@ -62,8 +63,8 @@ if (!Value.Check(Dependency, res)) {
 
 let coordinates: string[] = [];
 for (const dependencyGraphManifest of res.repository.dependencyGraphManifests
-  .edges) {
-  for (const dependencies of dependencyGraphManifest.node.dependencies.nodes) {
+  .nodes) {
+  for (const dependencies of dependencyGraphManifest.dependencies.nodes) {
     if (
       dependencies.packageManager === "NPM" &&
       dependencies.requirements.startsWith("= ")

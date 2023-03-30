@@ -3,19 +3,22 @@ import { Static, Type } from "@sinclair/typebox";
 export const Dependency = Type.Object({
   repository: Type.Object({
     dependencyGraphManifests: Type.Object({
-      edges: Type.Array(
+      nodes: Type.Array(
         Type.Object({
-          node: Type.Object({
-            dependencies: Type.Object({
-              nodes: Type.Array(
-                Type.Object({
-                  packageManager: Type.String(),
-                  packageName: Type.String(),
-                  requirements: Type.String(),
-                })
-              ),
-            }),
+          blobPath: Type.String(),
+          dependencies: Type.Object({
+            nodes: Type.Array(
+              Type.Object({
+                packageManager: Type.String(),
+                packageName: Type.String(),
+                requirements: Type.String(),
+              })
+            ),
           }),
+          dependenciesCount: Type.Integer(),
+          exceedsMaxSize: Type.Boolean(),
+          filename: Type.String(),
+          parseable: Type.Boolean(),
         })
       ),
     }),
