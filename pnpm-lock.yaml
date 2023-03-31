@@ -14,8 +14,8 @@ dependencies:
     specifier: 2.0.1
     version: 2.0.1(@octokit/core@4.2.0)
   '@sinclair/typebox':
-    specifier: 0.26.6
-    version: 0.26.6
+    specifier: 0.26.8
+    version: 0.26.8
   '@sindresorhus/is':
     specifier: 5.3.0
     version: 5.3.0
@@ -464,8 +464,8 @@ packages:
       '@octokit/openapi-types': 16.0.0
     dev: false
 
-  /@sinclair/typebox@0.26.6:
-    resolution: {integrity: sha512-7BT4sRfeCV5j/CK/+cXu05B2IxrNBhD1rR3HJ8XG3/oqZfJIA60GnNKo+N4VHA47JTg8zlXuYTLYMVxI3pwMEQ==}
+  /@sinclair/typebox@0.26.8:
+    resolution: {integrity: sha512-fvAkOrUWndf5vjptkW+4TeTH84/bILWQHgk7rbbzT8trZxW+b84lr8dZQPM/r7cGNRFxDaJYsMjHCikEYyAHaw==}
     dev: false
 
   /@sindresorhus/is@5.3.0:
