@@ -19,7 +19,7 @@
   "devDependencies": {
     "@tsconfig/esm": "1.0.2",
     "@tsconfig/node16": "1.0.3",
-    "@types/node": "16.18.22",
+    "@types/node": "16.18.23",
     "@typescript-eslint/parser": "5.57.0",
     "@typescript-eslint/eslint-plugin": "5.57.0",
     "esbuild": "0.17.14",
