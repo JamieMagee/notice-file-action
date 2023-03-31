@@ -1,7 +1,7 @@
 import esbuild from "esbuild";
 
-esbuild
-  .build({
+try {
+  await esbuild.build({
     entryPoints: ["src/index.ts"],
     platform: "node",
     outdir: "dist",
@@ -10,8 +10,11 @@ esbuild
     splitting: true,
     format: "esm",
     target: ["esnext"],
+
     banner: {
       js: `import { createRequire } from 'module';const require = createRequire(import.meta.url);`,
     },
-  })
-  .catch(() => process.exit(1));
+  });
+} catch (e) {
+  process.exit(1);
+}

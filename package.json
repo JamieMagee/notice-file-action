@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "start": "ts-node-esm src/index.ts",
-    "build": "node ./esbuild.js"
+    "build": "ts-node-esm esbuild.ts",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@actions/artifact": "1.1.1",
