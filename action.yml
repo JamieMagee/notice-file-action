@@ -3,3 +3,14 @@ description: 'Generates NOTICE files'
 runs:
   main: dist/index.js
   using: node16
+inputs:
+  format:
+    description: |
+      The output format to use.
+      Can be:
+        - html
+        - json
+        - markdown
+        - text
+    required: false
+    default: 'markdown'
