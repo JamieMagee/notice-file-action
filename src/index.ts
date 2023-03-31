@@ -29,28 +29,26 @@ const octokit = new (Octokit.plugin(paginateGraphql))({
 });
 
 const res = await octokit.graphql(
-  `
-    query ($owner: String!, $name: String!) {
-      repository(owner: $owner, name: $name) {
-        dependencyGraphManifests {
-          nodes {
-            blobPath
-            dependencies {
-              nodes {
-                packageManager
-                packageName
-                requirements
-              }
+  `query ($owner: String!, $name: String!) {
+    repository(owner: $owner, name: $name) {
+      dependencyGraphManifests {
+        nodes {
+          blobPath
+          dependencies {
+            nodes {
+              packageManager
+              packageName
+              requirements
             }
-            dependenciesCount
-            exceedsMaxSize
-            filename
-            parseable
           }
+          dependenciesCount
+          exceedsMaxSize
+          filename
+          parseable
         }
       }
     }
-  `,
+  }`,
   {
     owner,
     name,

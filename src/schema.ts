@@ -1,4 +1,4 @@
-import { Static, Type } from "@sinclair/typebox";
+import { Type } from "@sinclair/typebox";
 
 export const Dependency = Type.Object({
   repository: Type.Object({
