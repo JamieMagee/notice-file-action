@@ -27,7 +27,7 @@ jobs:
         with:
           version: latest
 
-      - name: "Install .NET Core SDK"
+      - name: "Install Node.js 16"
         uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # tag=v3.6.0
         with:
           node-version: 16
@@ -36,8 +36,8 @@ jobs:
       - name: "Install dependencies"
         run: pnpm install
 
-      - name: "Install dependencies"
+      - name: "Lint"
         run: pnpm run lint
 
-      - name: "Install dependencies"
+      - name: "Build"
         run: pnpm run build
