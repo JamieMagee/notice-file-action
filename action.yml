@@ -3,14 +3,22 @@ description: 'Generates NOTICE files'
 runs:
   main: dist/index.js
   using: node16
+branding:
+  icon: 'file-text'
+  color: white
 inputs:
+  token:
+    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+    default: ${{ github.token }}
   format:
-    description: |
+    description: >
       The output format to use.
       Can be:
         - html
         - json
-        - markdown
+        - template
         - text
-    required: false
-    default: 'markdown'
+    default: 'text'
+  filename:
+    description: ''
+    default: 'NOTICE'

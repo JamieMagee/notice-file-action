@@ -1,116 +1,57 @@
-import path from "node:path";
-import fs from "node:fs";
-import artifact from "@actions/artifact";
-import core from "@actions/core";
-import { Value } from "@sinclair/typebox/value";
-import {
-  ClearlyDefinedNoticeRequest,
-  ClearlyDefinedNoticeResponse,
-  Dependency,
-} from "./schema.ts";
-import got from "got";
-import { Static } from "@sinclair/typebox";
-import is from "@sindresorhus/is";
-import { Octokit } from "@octokit/core";
-import { paginateGraphql } from "@octokit/plugin-paginate-graphql";
+import path from 'node:path';
+import fs from 'node:fs';
+import artifact from '@actions/artifact';
+import core from '@actions/core';
+import is from '@sindresorhus/is';
+import { GitHubClient } from './http/github-client';
+import { ActionConfig } from './action-config';
+import { ClearlyDefinedClient } from './http/clearly-defined-client';
+import { CoordinateUtils } from './coordinate-utils';
 
-const githubRepository = process.env["GITHUB_REPOSITORY"];
+const githubRepository = process.env['GITHUB_REPOSITORY'];
 
 if (is.undefined(githubRepository)) {
-  core.error("Unable to determine repository");
+  core.error('Unable to determine repository');
   process.exit(-1);
 }
 
-const [owner, name, ..._] = githubRepository.split("/");
+const [owner, name, ..._] = githubRepository.split('/');
 
-const octokit = new (Octokit.plugin(paginateGraphql))({
-  auth: `token ${process.env["GITHUB_TOKEN"]}`,
-  previews: ["hawkgirl"], // https://docs.github.com/en/graphql/overview/schema-previews#access-to-a-repositorys-dependency-graph-preview
-});
-
-const res = await octokit.graphql(
-  `query ($owner: String!, $name: String!) {
-    repository(owner: $owner, name: $name) {
-      dependencyGraphManifests {
-        nodes {
-          blobPath
-          dependencies {
-            nodes {
-              packageManager
-              packageName
-              requirements
-            }
-          }
-          dependenciesCount
-          exceedsMaxSize
-          filename
-          parseable
-        }
-      }
-    }
-  }`,
-  {
-    owner,
-    name,
-  }
+const config = new ActionConfig();
+const ghClient = new GitHubClient(config.token);
+const response = await ghClient.queryDependencyGraph(
+  config.repoOwner,
+  config.repoName
 );
 
-if (!Value.Check(Dependency, res)) {
-  process.exit(0);
-}
-
-let coordinates: string[] = [];
-for (const dependencyGraphManifest of res.repository.dependencyGraphManifests
-  .nodes) {
-  for (const dependencies of dependencyGraphManifest.dependencies.nodes) {
-    if (
-      dependencies.packageManager === "NPM" &&
-      dependencies.requirements.startsWith("= ")
-    ) {
-      coordinates.push(
-        `npm/npmjs/-/${
-          dependencies.packageName
-        }/${dependencies.requirements.substring(2)}`
-      );
-    } else {
-      console.log(`${dependencies.packageName}, ${dependencies.requirements}`);
-    }
-  }
-}
-
-const req: Static<typeof ClearlyDefinedNoticeRequest> = {
-  coordinates,
-  renderer: "html",
-};
-const noticeRes = await got
-  .post<Static<typeof ClearlyDefinedNoticeResponse>>(
-    "https://api.clearlydefined.io/notices",
-    {
-      json: req,
-    }
+const coordinates = response.repository.dependencyGraphManifests.nodes
+  .flatMap((manifest) =>
+    manifest.dependencies.nodes.map(CoordinateUtils.convertToCoordinate)
   )
-  .json();
+  .filter(is.nonEmptyString);
 
-if (!Value.Check(ClearlyDefinedNoticeResponse, noticeRes)) {
-  process.exit(0);
-}
+const clearlyDefinedClient = new ClearlyDefinedClient();
+const noticeResponse = await clearlyDefinedClient.fetchNoticeFile(
+  coordinates,
+  config.format
+);
 
-for (const noCopyright of noticeRes.summary.warnings.noCopyright) {
+for (const noCopyright of noticeResponse.summary.warnings.noCopyright) {
   core.warning(`Unable to locate copyright for ${noCopyright}`);
 }
-for (const noDefinition of noticeRes.summary.warnings.noDefinition) {
+for (const noDefinition of noticeResponse.summary.warnings.noDefinition) {
   core.warning(`Unable to find package ${noDefinition}`);
 }
-for (const noLicense of noticeRes.summary.warnings.noLicense) {
+for (const noLicense of noticeResponse.summary.warnings.noLicense) {
   core.warning(`Unable to find locate license for ${noLicense}`);
 }
 
-const noticeFile = path.join(process.env["RUNNER_TEMP"]!, "notice.html");
+const noticeFile = path.join(process.env['RUNNER_TEMP']!, config.filename);
 
-fs.writeFileSync(noticeFile, noticeRes.content);
+fs.writeFileSync(noticeFile, noticeResponse.content);
 const artifactClient = artifact.create();
 await artifactClient.uploadArtifact(
-  "notice.html",
+  config.filename,
   [noticeFile],
-  process.env["RUNNER_TEMP"]!
+  process.env['RUNNER_TEMP']!
 );
