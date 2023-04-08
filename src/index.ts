@@ -3,19 +3,10 @@ import fs from 'node:fs';
 import artifact from '@actions/artifact';
 import core from '@actions/core';
 import is from '@sindresorhus/is';
-import { GitHubClient } from './http/github-client';
-import { ActionConfig } from './action-config';
-import { ClearlyDefinedClient } from './http/clearly-defined-client';
-import { CoordinateUtils } from './coordinate-utils';
-
-const githubRepository = process.env['GITHUB_REPOSITORY'];
-
-if (is.undefined(githubRepository)) {
-  core.error('Unable to determine repository');
-  process.exit(-1);
-}
-
-const [owner, name, ..._] = githubRepository.split('/');
+import { GitHubClient } from './http/github-client.ts';
+import { ActionConfig } from './action-config.ts';
+import { ClearlyDefinedClient } from './http/clearly-defined-client.ts';
+import { CoordinateUtils } from './coordinate-utils.ts';
 
 const config = new ActionConfig();
 const ghClient = new GitHubClient(config.token);
@@ -46,6 +37,7 @@ for (const noLicense of noticeResponse.summary.warnings.noLicense) {
   core.warning(`Unable to find locate license for ${noLicense}`);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const noticeFile = path.join(process.env['RUNNER_TEMP']!, config.filename);
 
 fs.writeFileSync(noticeFile, noticeResponse.content);
@@ -53,5 +45,6 @@ const artifactClient = artifact.create();
 await artifactClient.uploadArtifact(
   config.filename,
   [noticeFile],
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   process.env['RUNNER_TEMP']!
 );

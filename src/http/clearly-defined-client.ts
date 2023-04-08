@@ -1,4 +1,4 @@
-import { ClearlyDefinedNoticeResponse, Format } from '../schema';
+import { ClearlyDefinedNoticeResponse, Format } from '../schema.ts';
 import got from 'got';
 import core from '@actions/core';
 

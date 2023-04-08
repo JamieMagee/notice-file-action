@@ -1,6 +1,6 @@
 import core from '@actions/core';
 import is from '@sindresorhus/is';
-import { Format } from './schema';
+import { Format } from './schema.ts';
 
 export class ActionConfig {
   readonly format: Format = 'text';
@@ -35,7 +35,7 @@ export class ActionConfig {
       console.error('Invalid token');
       throw new Error();
     }
-    const [repoOwner, repoName, ..._] = repository.split('/');
+    const [repoOwner, repoName] = repository.split('/');
     this.repoOwner = repoOwner;
     this.repoName = repoName;
   }
