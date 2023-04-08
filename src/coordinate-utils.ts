@@ -15,6 +15,11 @@ export class CoordinateUtils {
   }
 
   static #convertNpm(_package: DependencyGraphPackage): string {
+    if (_package.packageName.includes('/')) {
+      return `npm/npmjs/${
+        _package.packageName
+      }/${_package.requirements.substring(2)}`;
+    }
     return `npm/npmjs/-/${
       _package.packageName
     }/${_package.requirements.substring(2)}`;
