@@ -12,4 +12,4 @@ jobs:
     name: test
     runs-on: ubuntu-latest
     steps:
-      - uses: JamieMagee/notice-action@main
+      - uses: JamieMagee/notice-file-action@main
