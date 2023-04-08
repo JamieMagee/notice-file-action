@@ -15,30 +15,29 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest, macOS-latest ]
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # tag=v3.5.0
+        with:
+          lfs: true
+          fetch-depth: 0
 
-steps:
-  - name: "Checkout"
-    uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # tag=v3.5.0
-    with:
-      lfs: true
-      fetch-depth: 0
+      - name: "Install pnpm"
+        uses: pnpm/action-setup@c3b53f6a16e57305370b4ae5a540c2077a1d50dd # tag=v2.2.4
+        with:
+          version: latest
 
-  - name: "Install pnpm"
-    uses: pnpm/action-setup@c3b53f6a16e57305370b4ae5a540c2077a1d50dd # tag=v2.2.4
-    with:
-      version: latest
+      - name: "Install .NET Core SDK"
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # tag=v3.6.0
+        with:
+          node-version: 16
+          cache: 'pnpm'
 
-  - name: "Install .NET Core SDK"
-    uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # tag=v3.6.0
-    with:
-      node-version: 16
-      cache: 'pnpm'
+      - name: "Install dependencies"
+        run: pnpm install
 
-  - name: "Install dependencies"
-    run: pnpm install
+      - name: "Install dependencies"
+        run: pnpm run lint
 
-  - name: "Install dependencies"
-    run: pnpm run lint
-
-  - name: "Install dependencies"
-    run: pnpm run build
+      - name: "Install dependencies"
+        run: pnpm run build
