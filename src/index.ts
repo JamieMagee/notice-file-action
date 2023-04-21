@@ -38,7 +38,7 @@ for (const noLicense of noticeResponse.summary.warnings.noLicense) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const noticeFile = path.join(process.env['RUNNER_TEMP']!, config.filename);
+const noticeFile = path.join(process.env['GITHUB_WORKSPACE']!, config.filename);
 
 fs.writeFileSync(noticeFile, noticeResponse.content);
 const artifactClient = artifact.create();
@@ -46,5 +46,5 @@ await artifactClient.uploadArtifact(
   config.filename,
   [noticeFile],
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  process.env['RUNNER_TEMP']!
+  process.env['GITHUB_WORKSPACE']!
 );
