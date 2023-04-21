@@ -31,8 +31,8 @@ devDependencies:
     specifier: 1.0.3
     version: 1.0.3
   '@tsconfig/strictest':
-    specifier: 2.0.0
-    version: 2.0.0
+    specifier: 2.0.1
+    version: 2.0.1
   '@types/node':
     specifier: 16.18.23
     version: 16.18.23
@@ -499,8 +499,8 @@ packages:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
     dev: true
 
-  /@tsconfig/strictest@2.0.0:
-    resolution: {integrity: sha512-E0dpiZNdwO20c8d3seh7OmjAvDpwoRkTcU6M8cvggzB45Bd45tyTU2XJeA5Wfq+8NzVGhunvqOJ30AjSkywMXA==}
+  /@tsconfig/strictest@2.0.1:
+    resolution: {integrity: sha512-7JHHCbyCsGUxLd0pDbp24yz3zjxw2t673W5oAP6HCEdr/UUhaRhYd3SSnUsGCk+VnPVJVA4mXROzbhI+nyIk+w==}
     dev: true
 
   /@types/http-cache-semantics@4.0.1:
