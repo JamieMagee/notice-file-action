@@ -25,8 +25,8 @@ dependencies:
 
 devDependencies:
   '@tsconfig/esm':
-    specifier: 1.0.2
-    version: 1.0.2
+    specifier: 1.0.3
+    version: 1.0.3
   '@tsconfig/node16':
     specifier: 1.0.3
     version: 1.0.3
@@ -479,8 +479,8 @@ packages:
       defer-to-connect: 2.0.1
     dev: false
 
-  /@tsconfig/esm@1.0.2:
-    resolution: {integrity: sha512-awiISx+G4L+7k97nKnfA5QF6rukawiuycMPfASFHG/0fqjrUlYBuNISy3Yjl1SHIpVi57lYf7dc6L/FoQQCKcA==}
+  /@tsconfig/esm@1.0.3:
+    resolution: {integrity: sha512-Gp56rIc3R8ab032nXMUitmc7YIb4nAi8DQ6Qt47tuL0Ssn9LIOm+o2FQmqPu3jX4z0TsqgzWwkmVygxcq+yHYg==}
     dev: true
 
   /@tsconfig/node10@1.0.9:
