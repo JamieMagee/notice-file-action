@@ -12,11 +12,11 @@ dependencies:
     specifier: 1.10.0
     version: 1.10.0
   '@octokit/core':
-    specifier: 4.2.1
-    version: 4.2.1
+    specifier: 4.2.4
+    version: 4.2.4
   '@octokit/plugin-paginate-graphql':
     specifier: 2.0.3
-    version: 2.0.3(@octokit/core@4.2.1)
+    version: 2.0.3(@octokit/core@4.2.4)
   '@sindresorhus/is':
     specifier: 5.4.1
     version: 5.4.1
@@ -395,8 +395,8 @@ packages:
       '@octokit/types': 9.2.3
     dev: false
 
-  /@octokit/core@4.2.1:
-    resolution: {integrity: sha512-tEDxFx8E38zF3gT7sSMDrT1tGumDgsw5yPG6BBh/X+5ClIQfMH/Yqocxz1PnHx6CHyF6pxmovUTOfZAUvQ0Lvw==}
+  /@octokit/core@4.2.4:
+    resolution: {integrity: sha512-rYKilwgzQ7/imScn3M9/pFfUf4I1AZEH3KhyJmtPdE2zfaXAn2mFfUy4FbKewzc2We5y/LlKLj36fWJLKC2SIQ==}
     engines: {node: '>= 14'}
     dependencies:
       '@octokit/auth-token': 3.0.3
@@ -434,12 +434,12 @@ packages:
     resolution: {integrity: sha512-MazrFNx4plbLsGl+LFesMo96eIXkFgEtaKbnNpdh4aQ0VM10aoylFsTYP1AEjkeoRNZiiPe3T6Gl2Hr8dJWdlQ==}
     dev: false
 
-  /@octokit/plugin-paginate-graphql@2.0.3(@octokit/core@4.2.1):
+  /@octokit/plugin-paginate-graphql@2.0.3(@octokit/core@4.2.4):
     resolution: {integrity: sha512-gMZN0bEksY1d67rN4oBdU9Jor682tGt7sbEiidDLHJtsKmhWYEPJgWmPG1e6omrxE5S52VZxSRm5UY/utYje5w==}
     peerDependencies:
       '@octokit/core': '>=4'
     dependencies:
-      '@octokit/core': 4.2.1
+      '@octokit/core': 4.2.4
     dev: false
 
   /@octokit/request-error@3.0.3:
