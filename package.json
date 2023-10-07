@@ -17,7 +17,7 @@
     "zod": "3.22.4"
   },
   "devDependencies": {
-    "@tsconfig/esm": "1.0.4",
+    "@tsconfig/esm": "1.0.5",
     "@tsconfig/node16": "1.0.4",
     "@tsconfig/strictest": "2.0.2",
     "@types/node": "16.18.58",
