@@ -38,8 +38,8 @@ devDependencies:
     specifier: 2.0.3
     version: 2.0.3
   '@types/node':
-    specifier: 16.18.80
-    version: 16.18.80
+    specifier: 16.18.82
+    version: 16.18.82
   '@typescript-eslint/eslint-plugin':
     specifier: 5.62.0
     version: 5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.56.0)(typescript@5.3.3)
@@ -60,7 +60,7 @@ devDependencies:
     version: 2.8.8
   ts-node:
     specifier: 10.9.2
-    version: 10.9.2(@types/node@16.18.80)(typescript@5.3.3)
+    version: 10.9.2(@types/node@16.18.82)(typescript@5.3.3)
   typescript:
     specifier: 5.3.3
     version: 5.3.3
@@ -534,8 +534,8 @@ packages:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
     dev: true
 
-  /@types/node@16.18.80:
-    resolution: {integrity: sha512-vFxJ1Iyl7A0+xB0uW1r1v504yItKZLdqg/VZELUZ4H02U0bXAgBisSQ8Erf0DMruNFz9ggoiEv6T8Ll9bTg8Jw==}
+  /@types/node@16.18.82:
+    resolution: {integrity: sha512-pcDZtkx9z8XYV+ius2P3Ot2VVrcYOfXffBQUBuiszrlUzKSmoDYqo+mV+IoL8iIiIjjtOMvNSmH1hwJ+Q+f96Q==}
     dev: true
 
   /@types/semver@7.5.7:
@@ -1537,7 +1537,7 @@ packages:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
     dev: false
 
-  /ts-node@10.9.2(@types/node@16.18.80)(typescript@5.3.3):
+  /ts-node@10.9.2(@types/node@16.18.82)(typescript@5.3.3):
     resolution: {integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==}
     hasBin: true
     peerDependencies:
@@ -1556,7 +1556,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 16.18.80
+      '@types/node': 16.18.82
       acorn: 8.11.3
       acorn-walk: 8.3.2
       arg: 4.1.3
