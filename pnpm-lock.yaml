@@ -9,8 +9,8 @@ dependencies:
     specifier: 1.1.2
     version: 1.1.2
   '@actions/core':
-    specifier: 1.10.1
-    version: 1.10.1
+    specifier: 1.11.1
+    version: 1.11.1
   '@octokit/core':
     specifier: 4.2.4
     version: 4.2.4
@@ -75,17 +75,23 @@ packages:
   /@actions/artifact@1.1.2:
     resolution: {integrity: sha512-1gLONA4xw3/Q/9vGxKwkFdV9u1LE2RWGx/IpAqg28ZjprCnJFjwn4pA7LtShqg5mg5WhMek2fjpyH1leCmOlQQ==}
     dependencies:
-      '@actions/core': 1.10.1
+      '@actions/core': 1.11.1
       '@actions/http-client': 2.2.1
       tmp: 0.2.3
       tmp-promise: 3.0.3
     dev: false
 
-  /@actions/core@1.10.1:
-    resolution: {integrity: sha512-3lBR9EDAY+iYIpTnTIXmWcNbX3T2kCkAEQGIQx4NVQ0575nk2k3GRZDTPQG+vVtS2izSLmINlxXf0uLtnrTP+g==}
+  /@actions/core@1.11.1:
+    resolution: {integrity: sha512-hXJCSrkwfA46Vd9Z3q4cpEpHB1rL5NG04+/rbqW9d3+CSvtB1tYe8UTpAlixa1vj0m/ULglfEK2UKxMGxCxv5A==}
     dependencies:
+      '@actions/exec': 1.1.1
       '@actions/http-client': 2.2.1
-      uuid: 8.3.2
+    dev: false
+
+  /@actions/exec@1.1.1:
+    resolution: {integrity: sha512-+sCcHHbVdk93a0XT19ECtO/gIXoxvdsgQLzb2fE2/5sIZmWQuluYyjPQtrtTHdU1YzTZ7bAPN4sITq2xi1679w==}
+    dependencies:
+      '@actions/io': 1.1.3
     dev: false
 
   /@actions/http-client@2.2.1:
@@ -93,6 +99,10 @@ packages:
     dependencies:
       tunnel: 0.0.6
       undici: 5.28.4
+    dev: false
+
+  /@actions/io@1.1.3:
+    resolution: {integrity: sha512-wi9JjgKLYS7U/z8PPbco+PvTb/nRWjeoFlJ1Qer83k/3C5PHQi28hiVdeE2kHXmIL99mQFawx8qt/JPjZilJ8Q==}
     dev: false
 
   /@cspotcode/source-map-support@0.8.1:
@@ -1629,11 +1639,6 @@ packages:
     dependencies:
       punycode: 2.3.1
     dev: true
-
-  /uuid@8.3.2:
-    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
-    hasBin: true
-    dev: false
 
   /v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
