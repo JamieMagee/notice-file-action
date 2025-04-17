@@ -26,7 +26,7 @@ jobs:
           version: latest
 
       - name: "Install Node.js 16"
-        uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3.8.2
+        uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610 # v3.9.1
         with:
           node-version: 16
           cache: 'pnpm'
