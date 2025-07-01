@@ -1,7 +1,5 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { DefaultArtifactClient } from '@actions/artifact';
-import { warning } from '@actions/core';
 import is from '@sindresorhus/is';
 import { ActionConfig } from './action-config';
 import { CoordinateUtils } from './coordinate-utils';
@@ -28,13 +26,13 @@ const noticeResponse = await clearlyDefinedClient.fetchNoticeFile(
 );
 
 for (const noCopyright of noticeResponse.summary.warnings.noCopyright) {
-  warning(`Unable to locate copyright for ${noCopyright}`);
+  console.log(`::warning::Unable to locate copyright for ${noCopyright}`);
 }
 for (const noDefinition of noticeResponse.summary.warnings.noDefinition) {
-  warning(`Unable to find package ${noDefinition}`);
+  console.log(`::warning::Unable to find package ${noDefinition}`);
 }
 for (const noLicense of noticeResponse.summary.warnings.noLicense) {
-  warning(`Unable to find locate license for ${noLicense}`);
+  console.log(`::warning::Unable to find locate license for ${noLicense}`);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -42,10 +40,14 @@ const noticeFile = path.join(process.env['GITHUB_WORKSPACE']!, config.filename);
 
 fs.writeFileSync(noticeFile, noticeResponse.content);
 
-const artifactClient = new DefaultArtifactClient();
-await artifactClient.uploadArtifact(
-  config.filename,
-  [noticeFile],
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  process.env['GITHUB_WORKSPACE']!
+// Set output parameter to indicate the notice file path
+console.log(
+  `notice-file-path=${noticeFile}\nnotice-filename=${config.filename}`
 );
+
+// Use GITHUB_OUTPUT environment file to set outputs
+const githubOutput = process.env['GITHUB_OUTPUT'];
+if (githubOutput) {
+  fs.appendFileSync(githubOutput, `notice-file-path=${noticeFile}\n`);
+  fs.appendFileSync(githubOutput, `notice-filename=${config.filename}\n`);
+}
