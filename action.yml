@@ -1,8 +1,8 @@
 name: 'NOTICE file generator'
 description: 'Generates NOTICE files'
 runs:
-  main: dist/index.js
-  using: node16
+  main: dist/index.mjs
+  using: node20
 branding:
   icon: 'file-text'
   color: white

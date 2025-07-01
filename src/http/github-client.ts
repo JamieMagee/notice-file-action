@@ -1,13 +1,13 @@
-import { Octokit } from '@octokit/core';
-import { paginateGraphql } from '@octokit/plugin-paginate-graphql';
-import { DependencyGraphResponse } from '../schema.ts';
 import core from '@actions/core';
+import { Octokit } from '@octokit/core';
+import { paginateGraphQL } from '@octokit/plugin-paginate-graphql';
+import { DependencyGraphResponse } from '../schema';
 
 export class GitHubClient {
   private readonly octokit: Octokit;
 
   constructor(token: string) {
-    this.octokit = new (Octokit.plugin(paginateGraphql))({
+    this.octokit = new (Octokit.plugin(paginateGraphQL))({
       auth: `token ${token}`,
       previews: ['hawkgirl'], // https://docs.github.com/en/graphql/overview/schema-previews#access-to-a-repositorys-dependency-graph-preview
       request: {
