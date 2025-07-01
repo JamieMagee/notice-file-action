@@ -1,4 +1,4 @@
-import core from '@actions/core';
+import { error } from '@actions/core';
 import { Octokit } from '@octokit/core';
 import { paginateGraphQL } from '@octokit/plugin-paginate-graphql';
 import { DependencyGraphResponse } from '../schema';
@@ -49,7 +49,7 @@ export class GitHubClient {
 
     const res = await DependencyGraphResponse.safeParseAsync(rawResponse);
     if (!res.success) {
-      core.error(`Invalid response: ${res.error}`);
+      error(`Invalid response: ${res.error}`);
       throw new Error();
     }
 

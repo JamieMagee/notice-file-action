@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import artifact from '@actions/artifact';
-import core from '@actions/core';
+import { warning } from '@actions/core';
 import is from '@sindresorhus/is';
 import { ActionConfig } from './action-config';
 import { CoordinateUtils } from './coordinate-utils';
@@ -28,13 +28,13 @@ const noticeResponse = await clearlyDefinedClient.fetchNoticeFile(
 );
 
 for (const noCopyright of noticeResponse.summary.warnings.noCopyright) {
-  core.warning(`Unable to locate copyright for ${noCopyright}`);
+  warning(`Unable to locate copyright for ${noCopyright}`);
 }
 for (const noDefinition of noticeResponse.summary.warnings.noDefinition) {
-  core.warning(`Unable to find package ${noDefinition}`);
+  warning(`Unable to find package ${noDefinition}`);
 }
 for (const noLicense of noticeResponse.summary.warnings.noLicense) {
-  core.warning(`Unable to find locate license for ${noLicense}`);
+  warning(`Unable to find locate license for ${noLicense}`);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

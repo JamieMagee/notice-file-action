@@ -1,6 +1,6 @@
-import core from '@actions/core';
+import { error } from '@actions/core';
 import got from 'got';
-import { ClearlyDefinedNoticeResponse, type Format } from '../schema.ts';
+import { ClearlyDefinedNoticeResponse, type Format } from '../schema';
 
 export class ClearlyDefinedClient {
   async fetchNoticeFile(
@@ -18,7 +18,7 @@ export class ClearlyDefinedClient {
 
     const res = await ClearlyDefinedNoticeResponse.safeParseAsync(noticeRes);
     if (!res.success) {
-      core.error(`Invalid response from ClearlyDefined: ${res.error}`);
+      error(`Invalid response from ClearlyDefined: ${res.error}`);
       throw new Error();
     }
 

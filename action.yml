@@ -1,14 +1,14 @@
-name: 'NOTICE file generator'
-description: 'Generates NOTICE files'
+name: "NOTICE file generator"
+description: "Generates NOTICE files"
 runs:
   main: dist/index.mjs
   using: node20
 branding:
-  icon: 'file-text'
+  icon: "file-text"
   color: white
 inputs:
   token:
-    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+    description: "GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)"
     default: ${{ github.token }}
   format:
     description: >
@@ -18,7 +18,7 @@ inputs:
         - json
         - template
         - text
-    default: 'text'
+    default: "text"
   filename:
-    description: ''
-    default: 'NOTICE'
+    description: ""
+    default: "NOTICE"

@@ -1,6 +1,6 @@
-import core from '@actions/core';
+import { getInput } from '@actions/core';
 import is from '@sindresorhus/is';
-import { Format } from './schema.ts';
+import { Format } from './schema';
 
 export class ActionConfig {
   readonly format: Format = 'text';
@@ -10,7 +10,7 @@ export class ActionConfig {
   readonly repoName: string;
 
   constructor() {
-    const format = core.getInput('format');
+    const format = getInput('format');
     const formatResult = Format.safeParse(format);
     if (!formatResult.success) {
       console.error(`Unknown format: ${format}`);
@@ -18,13 +18,13 @@ export class ActionConfig {
     }
     this.format = formatResult.data;
 
-    this.filename = core.getInput('filename');
+    this.filename = getInput('filename');
     if (is.emptyStringOrWhitespace(this.filename)) {
       console.error('Invalid filename');
       throw new Error();
     }
 
-    this.token = core.getInput('token');
+    this.token = getInput('token');
     if (is.emptyStringOrWhitespace(this.token)) {
       console.error('Invalid token');
       throw new Error();
@@ -36,7 +36,7 @@ export class ActionConfig {
       throw new Error();
     }
     const [repoOwner, repoName] = repository.split('/');
-    this.repoOwner = repoOwner;
-    this.repoName = repoName;
+    this.repoOwner = repoOwner!;
+    this.repoName = repoName!;
   }
 }
