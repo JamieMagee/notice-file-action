@@ -1,4 +1,3 @@
-import got from 'got';
 import { ClearlyDefinedNoticeResponse, type Format } from '../schema';
 
 export class ClearlyDefinedClient {
@@ -6,14 +5,22 @@ export class ClearlyDefinedClient {
     coordinates: string[],
     format: Format
   ): Promise<ClearlyDefinedNoticeResponse> {
-    const noticeRes = await got
-      .post('https://api.clearlydefined.io/notices', {
-        json: {
-          coordinates,
-          renderer: format,
-        },
-      })
-      .json();
+    const response = await fetch('https://api.clearlydefined.io/notices', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        coordinates,
+        renderer: format,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const noticeRes = await response.json();
 
     const res = await ClearlyDefinedNoticeResponse.safeParseAsync(noticeRes);
     if (!res.success) {

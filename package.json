@@ -12,7 +12,6 @@
     "@octokit/core": "7.0.2",
     "@octokit/plugin-paginate-graphql": "6.0.0",
     "@sindresorhus/is": "7.0.2",
-    "got": "14.4.7",
     "zod": "3.25.67"
   },
   "devDependencies": {
