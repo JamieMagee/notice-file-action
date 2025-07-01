@@ -3,31 +3,25 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "ts-node-esm src/index.ts",
-    "build": "ts-node-esm esbuild.ts",
-    "lint": "eslint ."
+    "build": "node esbuild.mjs --production",
+    "lint": "biome check ./src"
   },
   "dependencies": {
-    "@actions/artifact": "1.1.2",
-    "@actions/core": "1.10.1",
-    "@octokit/core": "4.2.4",
-    "@octokit/plugin-paginate-graphql": "2.0.3",
-    "@sindresorhus/is": "5.6.0",
-    "got": "12.6.1",
-    "zod": "3.22.4"
+    "@actions/artifact": "2.3.2",
+    "@actions/core": "1.11.1",
+    "@octokit/core": "7.0.2",
+    "@octokit/plugin-paginate-graphql": "6.0.0",
+    "@sindresorhus/is": "7.0.2",
+    "got": "14.4.7",
+    "zod": "3.25.67"
   },
   "devDependencies": {
-    "@tsconfig/esm": "1.0.5",
-    "@tsconfig/node16": "1.0.4",
+    "@tsconfig/node20": "20.1.6",
     "@tsconfig/strictest": "2.0.5",
-    "@types/node": "16.18.96",
-    "@typescript-eslint/parser": "5.62.0",
-    "@typescript-eslint/eslint-plugin": "5.62.0",
-    "esbuild": "0.20.2",
-    "eslint": "8.57.0",
-    "eslint-config-prettier": "8.10.0",
-    "prettier": "2.8.8",
+    "@types/node": "20.19.2",
+    "@biomejs/biome": "2.0.6",
+    "esbuild": "0.25.5",
     "ts-node": "10.9.2",
-    "typescript": "5.4.4"
+    "typescript": "5.8.3"
   }
 }

@@ -1,4 +1,4 @@
-import { DependencyGraphPackage } from './schema';
+import type { DependencyGraphPackage } from './schema';
 
 export class CoordinateUtils {
   static convertToCoordinate(

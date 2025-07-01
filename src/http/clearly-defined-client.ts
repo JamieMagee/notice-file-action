@@ -1,6 +1,6 @@
-import { ClearlyDefinedNoticeResponse, Format } from '../schema.ts';
-import got from 'got';
 import core from '@actions/core';
+import got from 'got';
+import { ClearlyDefinedNoticeResponse, type Format } from '../schema.ts';
 
 export class ClearlyDefinedClient {
   async fetchNoticeFile(
