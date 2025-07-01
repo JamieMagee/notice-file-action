@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import artifact from '@actions/artifact';
+import { DefaultArtifactClient } from '@actions/artifact';
 import { warning } from '@actions/core';
 import is from '@sindresorhus/is';
 import { ActionConfig } from './action-config';
@@ -41,7 +41,9 @@ for (const noLicense of noticeResponse.summary.warnings.noLicense) {
 const noticeFile = path.join(process.env['GITHUB_WORKSPACE']!, config.filename);
 
 fs.writeFileSync(noticeFile, noticeResponse.content);
-await artifact.uploadArtifact(
+
+const artifactClient = new DefaultArtifactClient();
+await artifactClient.uploadArtifact(
   config.filename,
   [noticeFile],
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
