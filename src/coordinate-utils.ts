@@ -37,7 +37,7 @@ export class CoordinateUtils {
     // For scoped packages (e.g., @scope/package), namespace is the scope
     // For unscoped packages, namespace is "-"
     const version = _package.requirements.substring(2); // Remove "^" or "~" prefix
-    
+
     if (_package.packageName.includes('/')) {
       // Scoped package: @scope/name
       const [scope, name] = _package.packageName.split('/');
@@ -83,7 +83,7 @@ export class CoordinateUtils {
     // Format: composer/packagist/vendor/package/version
     // Package name format: vendor/package
     const version = _package.requirements.replace(/[~^>=<]/, '').trim();
-    
+
     if (_package.packageName.includes('/')) {
       const [vendor, packageName] = _package.packageName.split('/');
       return `composer/packagist/${vendor}/${packageName}/${version}`;
@@ -96,7 +96,7 @@ export class CoordinateUtils {
     // Format: go/golang/namespace/name/version
     // Go modules often have domain-based names like github.com/user/repo
     const version = _package.requirements.replace(/^v/, ''); // Remove "v" prefix if present
-    
+
     // Extract namespace and name from the module path
     const parts = _package.packageName.split('/');
     if (parts.length >= 3) {
@@ -119,7 +119,7 @@ export class CoordinateUtils {
     // Format: swift/swiftpm/namespace/name/version
     // Swift packages often have GitHub URLs, extract relevant parts
     const version = _package.requirements.replace(/[~^>=<]/, '').trim();
-    
+
     if (_package.packageName.includes('/')) {
       const [namespace, name] = _package.packageName.split('/');
       return `swift/swiftpm/${namespace}/${name}/${version}`;
