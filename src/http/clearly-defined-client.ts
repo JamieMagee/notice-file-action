@@ -1,4 +1,3 @@
-import { error } from '@actions/core';
 import got from 'got';
 import { ClearlyDefinedNoticeResponse, type Format } from '../schema';
 
@@ -18,7 +17,9 @@ export class ClearlyDefinedClient {
 
     const res = await ClearlyDefinedNoticeResponse.safeParseAsync(noticeRes);
     if (!res.success) {
-      error(`Invalid response from ClearlyDefined: ${res.error}`);
+      console.log(
+        `::error::Invalid response from ClearlyDefined: ${res.error}`
+      );
       throw new Error();
     }
 

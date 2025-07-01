@@ -22,3 +22,8 @@ inputs:
   filename:
     description: ""
     default: "NOTICE"
+outputs:
+  notice-file-path:
+    description: "Path to the generated NOTICE file"
+  notice-filename:
+    description: "Name of the generated NOTICE file"
