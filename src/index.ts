@@ -9,10 +9,38 @@ import { GitHubClient } from './http/github-client';
 
 const config = new ActionConfig();
 const ghClient = new GitHubClient(config.token);
-const response = await ghClient.queryDependencyGraph(
-  config.repoOwner,
-  config.repoName
-);
+
+// biome-ignore lint/suspicious/noImplicitAnyLet: Too complex to type
+let response;
+try {
+  console.log('::debug::Attempting full dependency graph query...');
+  response = await ghClient.queryDependencyGraph(
+    config.repoOwner,
+    config.repoName
+  );
+} catch (error: any) {
+  if (
+    error.message?.includes('timeout') ||
+    error.message?.includes('too large')
+  ) {
+    console.log(
+      '::warning::Full query timed out, falling back to limited query...'
+    );
+    try {
+      response = await ghClient.queryDependencyGraphLimited(
+        config.repoOwner,
+        config.repoName,
+        15, // max manifests
+        30 // max dependencies per manifest
+      );
+    } catch (limitedError: any) {
+      console.log('::error::Both full and limited queries failed');
+      throw limitedError;
+    }
+  } else {
+    throw error;
+  }
+}
 
 const coordinates = response.repository.dependencyGraphManifests.nodes
   .flatMap((manifest) =>
